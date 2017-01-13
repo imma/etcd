@@ -18,6 +18,7 @@ function bootstrap {
   tar xvfz "${BASEBOX_CACHE}/curl/$fnm_buildkite"
   chmod 755 buildkite-agent
   mv buildkite-agent "$shome/bin/"
+  mv bootstrap.sh "$shome/.buildkite/"
   popd
 }
 

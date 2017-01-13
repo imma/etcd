@@ -2,7 +2,7 @@
 
 function _buildkite_profile {
   local shome="${_buildkite_home:-"$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
-  PATH="$shome/bin:$PATH"
+  PATH="$shome/.buildkite/bin:$shome/bin:$PATH"
 
   BUILDKITE_VERSION="${buildkite_VERSION:-2.3.2}"
 }
