@@ -5,7 +5,8 @@ function main {
   source "$shome/script/profile"
   source normalize  
 
-  exec buildkite-agent start --bootstrap-script ${shome}/bootstrap.sh --build-path ${shome}/builds --hooks-path ${shome}/hooks "$@"
+  cd "$shome/.buildkite"
+  exec buildkite-agent start --bootstrap-script ${shome}/.buildkite/bootstrap.sh --build-path ${shome}/.buildkite/builds --hooks-path ${shome}/.buildkite/hooks "$@"
 }
 
 main "$@"
