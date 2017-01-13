@@ -11,12 +11,14 @@ function bootstrap {
   local fnm_buildkite="$(basename "${!url_buildkite}")"
   cache curl "$fnm_buildkite" "${!url_buildkite}"
 
+  mkdir -p ~/.buildkite
+  mkdir -p ~/.buildkite/builds
   mkdir -p "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
   pushd "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
   tar xvfz "${BASEBOX_CACHE}/curl/$fnm_buildkite"
   chmod 755 buildkite-agent
   mv buildkite-agent "$shome/bin/"
-  mv bootstrap.sh "$shome/"
+  rsync -ia . ~/.buildkite/
   popd
 }
 
