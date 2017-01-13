@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+function bootstrap {
+  local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
+  source "$shome/script/profile"
+
+  local url_buildkite_Darwin="https://github.com/buildkite/agent/releases/download/v${BUILDKITE_VERSION}/buildkite-agent-darwin-amd64-${BUILDKITE_VERSION}.tar.gz"
+  local url_buildkite_Linux="https://github.com/buildkite/agent/releases/download/v${BUILDKITE_VERSION}/buildkite-agent-linux-amd64-${BUILDKITE_VERSION}.tar.gz"
+
+  local url_buildkite="url_buildkite_$(uname -s)"
+  local fnm_buildkite="$(basename "${!url_buildkite}")"
+  cache curl "$fnm_buildkite" "${!url_buildkite}"
+
+  mkdir -p "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
+  pushd "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
+  tar xvfz "${BASEBOX_CACHE}/curl/$fnm_buildkite"
+  chmod 755 buildkite-agent
+  mv buildkite-agent "$shome/bin/"
+  mv bootstrap.sh "$shome/"
+  popd
+}
+
+bootstrap
