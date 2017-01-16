@@ -15,7 +15,7 @@ function bootstrap {
   mkdir -p ~/.buildkite/builds
   mkdir -p "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
   pushd "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
-  tar xfz "${BASEBOX_CACHE}/curl/$fnm_buildkite"
+  tar xfz "/data/curl/$fnm_buildkite"
   chmod 755 buildkite-agent
   mv buildkite-agent "$shome/bin/"
   mv bootstrap.sh "$shome/.buildkite/"
