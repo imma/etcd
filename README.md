@@ -1,1 +1,1 @@
-Visit http://defn.sh/buildkite/ or open `docs/index.html`
+Visit http://defn.sh/etcd/ or open `docs/index.html`

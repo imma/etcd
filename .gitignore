@@ -1,3 +1,2 @@
 /vendor
-/.buildkite/bootstrap.sh
-/.buildkite/*.cfg
+/default.etcd/

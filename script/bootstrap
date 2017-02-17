@@ -4,22 +4,28 @@ function bootstrap {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local url_buildkite_Darwin="https://github.com/buildkite/agent/releases/download/v${BUILDKITE_VERSION}/buildkite-agent-darwin-amd64-${BUILDKITE_VERSION}.tar.gz"
-  local url_buildkite_Linux="https://github.com/buildkite/agent/releases/download/v${BUILDKITE_VERSION}/buildkite-agent-linux-amd64-${BUILDKITE_VERSION}.tar.gz"
+  local url_etcd_Darwin="https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-darwin-amd64.zip"
+  local url_etcd_Linux="https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz"
 
-  local url_buildkite="url_buildkite_$(uname -s)"
-  local fnm_buildkite="$(basename "${!url_buildkite}")"
-  cache curl "$fnm_buildkite" "${!url_buildkite}"
+  local url_etcd="url_etcd_$(uname -s)"
+  local fnm_etcd="$(basename "${!url_etcd}")"
+  cache curl "$fnm_etcd" "${!url_etcd}"
 
-  mkdir -p ~/.buildkite
-  mkdir -p ~/.buildkite/builds
-  mkdir -p "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
-  pushd "$shome/vendor/buildkite-${BUILDKITE_VERSION}"
-  tar xfz "/data/cache/curl/$fnm_buildkite"
-  chmod 755 buildkite-agent
-  mv buildkite-agent "$shome/bin/"
-  mv bootstrap.sh "$shome/.buildkite/"
+  rm -rf "$shome/vendor/etcd-${ETCD_VERSION}"
+  mkdir -p "$shome/vendor/etcd-${ETCD_VERSION}"
+  pushd "$shome/vendor/etcd-${ETCD_VERSION}"
+  case "$fnm_etcd" in
+    *.zip)
+      unzip "/data/cache/curl/$fnm_etcd"
+      ;;
+    *.tar.gz)
+      tar xvz "/data/cache/curl/$fnm_etcd"
+      ;;
+  esac
+
+  (set +f; mv */etcd */etcdctl "$shome/bin/")
   popd
+  rm -rf "$shome/vendor/etcd-${ETCD_VERSION}"
 }
 
 bootstrap

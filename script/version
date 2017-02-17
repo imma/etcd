@@ -4,8 +4,8 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_buildkite="$(buildkite-agent --version 2>/dev/null | awk 'NR == 1 {print $3}' | perl -pe 's{,$v}{}' || true)"
-  jq -n --arg buildkite "$ver_buildkite" '{buildkite: $buildkite}'
+  local ver_etcd="$(etcd --version 2>/dev/null | grep 'etcd Version' | awk '{print $3}' || true)"
+  jq -n --arg etcd "$ver_etcd" '{etcd: $etcd}'
 }
 
 version "$@"

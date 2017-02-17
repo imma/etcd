@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-function _buildkite_profile {
-  local shome="${_buildkite_home:-"$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
-  PATH="$shome/.buildkite/bin:$shome/bin:$PATH"
+function _etcd_profile {
+  local shome="${_etcd_home:-"$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
+  PATH="$shome/bin:$PATH"
 
-  BUILDKITE_VERSION="${buildkite_VERSION:-2.3.2}"
+  ETCD_VERSION="${ETCD_VERSION:-3.1.0}"
 }
 
-_buildkite_profile
+_etcd_profile
