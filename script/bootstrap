@@ -19,7 +19,7 @@ function bootstrap {
       unzip "/data/cache/curl/$fnm_etcd"
       ;;
     *.tar.gz)
-      tar xvz "/data/cache/curl/$fnm_etcd"
+      tar xfz "/data/cache/curl/$fnm_etcd"
       ;;
   esac
 
