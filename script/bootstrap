@@ -16,10 +16,10 @@ function bootstrap {
   pushd "$shome/vendor/etcd-${ETCD_VERSION}"
   case "$fnm_etcd" in
     *.zip)
-      unzip "/data/cache/curl/$fnm_etcd"
+      unzip "${CACHE_DIR}/curl/$fnm_etcd"
       ;;
     *.tar.gz)
-      tar xfz "/data/cache/curl/$fnm_etcd"
+      tar xfz "${CACHE_DIR}/curl/$fnm_etcd"
       ;;
   esac
 
