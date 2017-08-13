@@ -4,7 +4,7 @@ function _etcd_profile {
   local shome="${_etcd_home:="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
   PATH="$shome/bin:$PATH"
 
-  ETCD_VERSION="${ETCD_VERSION:-3.2.4}"
+  ETCD_VERSION="${ETCD_VERSION:-3.2.5}"
 }
 
 _etcd_profile
